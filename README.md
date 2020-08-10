@@ -10,3 +10,7 @@ PlFc is falcos anamation file.
 EfFx is the shared anamations between Fox and Falco (shine and firefox).
 
 PlMs is Marths sword swing anamation (also replaces the color of up B).
+
+EfCoData.dat is the shared anamations for all charecters along with PlCo.dat
+
+
