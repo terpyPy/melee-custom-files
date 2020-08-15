@@ -35,9 +35,9 @@ def cycle(line):
 
 sg.theme('DarkAmber')  # Add a touch of color
 # All the stuff inside your window.
-layout = [[sg.Text('enter the dat text file to parse'), sg.InputText()],
-          [sg.Output(size=(88, 20))],
-          [sg.Button('parse file'), sg.Button('Cancel')]]
+layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse()],
+          [sg.Output(size=(88, 20), key='output')],
+          [sg.Button('parse file'), sg.Button('clear'), sg.FileBrowse(button_text='browse', key='file'),sg.Button('Cancel')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -63,3 +63,5 @@ while True:
             pprint.pprint(matchDict)
             pprint.pprint(formatsArr)
             TXT_file.close()
+    if event == 'clear':
+        window['output'].update('')
