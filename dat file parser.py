@@ -1,6 +1,8 @@
 import re
 import pprint
 import PySimpleGUI as sg
+import os
+
 CFFormat = ['CF ##']
 zeroSevenFormat = ['070707']
 fourTwoFourEightFormat = ['4248']
@@ -28,6 +30,7 @@ def match_check(format, line, formatType):
 def cycle(line):
     x = 0
     for i in range(len(formats)):
+
         match_check(formats[i], line, formatsArr[x])
         if i >= 6:
             x += 1
@@ -37,7 +40,8 @@ sg.theme('DarkAmber')  # Add a touch of color
 # All the stuff inside your window.
 layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse()],
           [sg.Output(size=(88, 20), key='output')],
-          [sg.Button('parse file'), sg.Button('clear'), sg.FileBrowse(button_text='browse', key='file'),sg.Button('Cancel')]]
+          [sg.Button('parse file', bind_return_key=True), sg.Button('clear'), sg.Button('Cancel'),
+           sg.Button('write to txt file')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -50,18 +54,41 @@ while True:
         window.close()
         break
     if event == 'parse file' and values[0] is not None:
-        with open(values[0]) as TXT_file:
-            for line in TXT_file:
-                hexMatch = offsetRE.search(line)
-                if hexMatch is not None:
-                    offset, hexLine = hexMatch.groups()
-                cycle(hexLine)
-                twoHexLines = hexLine + ' ' + twoHexLines
-                if len(twoHexLines) > 100:
-                    twoHexLines = ''
-                cycle(twoHexLines)
-            pprint.pprint(matchDict)
-            pprint.pprint(formatsArr)
-            TXT_file.close()
+        for i in range(1):
+            sg.OneLineProgressMeter('One Line Meter Example', i + 1, 1, 'mymeter')
+            with open(values[0]) as TXT_file:
+                for line in TXT_file:
+                    hexMatch = offsetRE.search(line)
+                    if hexMatch is not None:
+                        offset, hexLine = hexMatch.groups()
+                    cycle(hexLine)
+                    twoHexLines = hexLine + ' ' + twoHexLines
+                    if len(twoHexLines) > 100:
+                        twoHexLines = ''
+                    cycle(twoHexLines)
+                pprint.pprint(matchDict)
+                pprint.pprint(formatsArr)
+                TXT_file.close()
+                sg.popup('parse complete', any_key_closes=True)
     if event == 'clear':
         window['output'].update('')
+        CFFormat *= 0
+        zeroSevenFormat *= 0
+        fourTwoFourEightFormat *= 0
+        nineEightZeroZeroFormat *= 0
+        CFFormat = ['CF ##']
+        zeroSevenFormat = ['070707']
+        fourTwoFourEightFormat = ['4248']
+        nineEightZeroZeroFormat = ['9800 ##']
+        hexLine = ''
+        twoHexLines = ''
+        matchDict = {}
+    if event == 'write to txt file':
+        path = os.path.dirname(os.path.abspath(__file__))
+        with open('dat_file_output.txt', 'w') as fp:
+            for key, val in matchDict.items():
+                fp.write('%s:%s\n' % (key, val))
+
+            for listItem in formatsArr:
+                fp.write('%s\n' % listItem)
+        fp.close()
