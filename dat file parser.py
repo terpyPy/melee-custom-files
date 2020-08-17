@@ -76,10 +76,10 @@ while True:
         zeroSevenFormat *= 0
         fourTwoFourEightFormat *= 0
         nineEightZeroZeroFormat *= 0
-        CFFormat = ['CF ##']
-        zeroSevenFormat = ['070707']
-        fourTwoFourEightFormat = ['4248']
-        nineEightZeroZeroFormat = ['9800 ##']
+        CFFormat.append('CF ##')
+        zeroSevenFormat.append('070707')
+        fourTwoFourEightFormat.append('4248')
+        nineEightZeroZeroFormat.append('9800 ##')
         hexLine = ''
         twoHexLines = ''
         matchDict = {}
