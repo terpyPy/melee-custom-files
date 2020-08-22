@@ -111,6 +111,11 @@ offsetRE = re.compile(r'.*([\da-fA-F]{8})'
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} '
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2})')
 
+def known_offsets(char):
+    for i in matchDict:
+        if i in char:
+            pprint.pprint(i + ' - ' + char[i])
+
 # checks if your hex format is in the current line of hex and if the offset has not been found
 def match_check(format, line, formatType):  
     if (format in line) and (offset not in matchDict):
@@ -192,17 +197,8 @@ while True:
                 fp.write('%s\n' % listItem)
         fp.close()
     if event == 'known offsets Luigi':
-        for i in matchDict:
-            if i in luigi:
-                pprint.pprint(i + ' - ' + luigi[i])
-        for i in luigi:
-            if i not in matchDict:
-                pprint.pprint('not found: ' + i + ' - ' + luigi[i])
+        known_offsets(luigi)
     if event == 'Known Captain Falcon':
-        for i in matchDict:
-            if i in captain_falcon:
-                pprint.pprint(i + ' - ' + captain_falcon[i])
+        known_offsets(captain_falcon)
     if event == 'shine offsets':
-        for i in matchDict:
-            if i in falco_fox:
-                pprint.pprint(i + ' - ' + falco_fox[i])
+        known_offsets(falco_fox)
