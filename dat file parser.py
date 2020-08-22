@@ -96,8 +96,8 @@ captain_falcon = {'00000120':'Trailing Smoke Down B 1',
 falco_fox = {'0001AC80': 'Tip of the Firefox',
              '0001C2A0': 'Shine',
              '0001C8E0': 'First Frames of Shine: Inner Hexagon',
-             '0001C950': 'First Frames of Shine: Inner Hexagon',
-             '1': '',
+             '0001C950': 'First Frames of Shine: Outer Hexagon Glow 1',
+             '0001CA90': 'First Frames of Shine: Outer Hexagon Glow 2',
              '2': '',
              '3': '',
              '4': '',
@@ -137,8 +137,9 @@ sg.theme('DarkAmber')  # Add a touch of color
 # All the stuff inside your window.
 layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse()],
           [sg.Output(size=(88, 20), key='output')],
-          [sg.Button('parse file', bind_return_key=True), sg.Button('clear'), sg.Button('Cancel'),
-           sg.Button('write to txt file'), sg.Button('known offsets Luigi'), sg.Button('Known Captain Falcon')]]
+          [sg.Button('parse file', bind_return_key=True),
+           sg.Button('clear'), sg.Button('Cancel'), sg.Button('write to txt file')],
+          [sg.Button('known offsets Luigi'), sg.Button('Known Captain Falcon'), sg.Button('shine offsets')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -199,3 +200,7 @@ while True:
         for i in matchDict:
             if i in captain_falcon:
                 pprint.pprint(i + ' - ' + captain_falcon[i])
+    if event == 'shine offsets':
+        for i in matchDict:
+            if i in falco_fox:
+                pprint.pprint(i + ' - ' + falco_fox[i])
