@@ -127,7 +127,6 @@ def match_check(format, line, formatType):
 def cycle(line):
     x = 0
     for i in range(len(formats)):
-
         match_check(formats[i], line, formatsArr[x])
         if i == 7:
             x += 1
