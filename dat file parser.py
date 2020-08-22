@@ -7,12 +7,12 @@ CFFormat = ['CF ##']
 zeroSevenFormat = ['070707']
 fourTwoFourEightFormat = ['4248']
 nineEightZeroZeroFormat = ['9800 ##']
-formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat]
+formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat] # this array contains all format list holders
 formats = ['CF 00', 'CF 08', 'CF 07', 'CF 0F', 'CF F0', 'CF 09', 'CF 04', 'CF 0C',
            '42 48',
            '07 07 07',
            '07 07 07 04',
-           '98 00']
+           '98 00'] # this array contains the format to be searched for in each line
 luigi = {'0000F3B0': 'aura around fireball', '0000F430': ' Aura around fireball',
          '0000F4D0': 'Affects the color of the fireball slightly',
          '000111E0': 'Inside of ring created when using neutral B',
@@ -111,13 +111,14 @@ offsetRE = re.compile(r'.*([\da-fA-F]{8})'
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} '
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2})')
 
-
-def match_check(format, line, formatType):
+# checks if your hex format is in the current line of hex and if the offset has not been found
+def match_check(format, line, formatType):  
     if (format in line) and (offset not in matchDict):
         matchDict[offset] = line
         formatType.append(offset)
 
-
+# takes the current line of hex the cycles through each format in the format array and the formats array list,
+# adds each offset to correct array 
 def cycle(line):
     x = 0
     for i in range(len(formats)):
@@ -151,7 +152,8 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
         window.close()
         break
-    if event == 'parse file' and values[0] is not None:
+    if event == 'parse file' and values[0] is not None: # open the txt file and search each line for hexadecimal
+                                                        # then cycle the line through each format type
 
         with open(values[0]) as TXT_file:
             for line in TXT_file:
