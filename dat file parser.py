@@ -8,11 +8,11 @@ zeroSevenFormat = ['070707']
 fourTwoFourEightFormat = ['4248']
 nineEightZeroZeroFormat = ['9800 ##']
 formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat] # this array contains all format list holders
-formats = ['CF 00', 'CF 08', 'CF 07', 'CF 0F', 'CF F0', 'CF 09', 'CF 04', 'CF 0C',
-           '42 48',
-           '07 07 07',
-           '07 07 07 04',
-           '98 00'] # this array contains the format to be searched for in each line
+formats = {0:'CF 00', 1:'CF 08', 2:'CF 07', 3:'CF 0F', 4:'CF F0', 5:'CF 09', 6:'CF 04', 7:'CF 0C',
+           8:'42 48',
+           9:'07 07 07',
+           10:'07 07 07 04',
+           11:'98 00'} # this array contains the format to be searched for in each line
 luigi = {'0000F3B0': 'aura around fireball', '0000F430': ' Aura around fireball',
          '0000F4D0': 'Affects the color of the fireball slightly',
          '000111E0': 'Inside of ring created when using neutral B',
@@ -98,8 +98,8 @@ falco_fox = {'0001AC80': 'Tip of the Firefox',
              '0001C8E0': 'First Frames of Shine: Inner Hexagon',
              '0001C950': 'First Frames of Shine: Outer Hexagon Glow 1',
              '0001CA90': 'First Frames of Shine: Outer Hexagon Glow 2',
-             '2': '',
-             '3': '',
+             '00000120': 'Shine Sparkles',
+             '000002E0': 'Trailing Fire Large Up B 1',
              '4': '',
              }
 
