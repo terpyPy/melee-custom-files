@@ -7,12 +7,12 @@ CFFormat = ['CF ##']
 zeroSevenFormat = ['070707']
 fourTwoFourEightFormat = ['4248']
 nineEightZeroZeroFormat = ['9800 ##']
-formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat]
-formats = ['CF 00', 'CF 08', 'CF 07', 'CF 0F', 'CF F0', 'CF 09', 'CF 04', 'CF 0C',
-           '42 48',
-           '07 07 07',
-           '07 07 07 04',
-           '98 00']
+formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat] # this array contains all format list holders
+formats = {0:'CF 00', 1:'CF 08', 2:'CF 07', 3:'CF 0F', 4:'CF F0', 5:'CF 09', 6:'CF 04', 7:'CF 0C',
+           8:'42 48',
+           9:'07 07 07',
+           10:'07 07 07 04',
+           11:'98 00'} # this array contains the format to be searched for in each line
 luigi = {'0000F3B0': 'aura around fireball', '0000F430': ' Aura around fireball',
          '0000F4D0': 'Affects the color of the fireball slightly',
          '000111E0': 'Inside of ring created when using neutral B',
@@ -98,8 +98,8 @@ falco_fox = {'0001AC80': 'Tip of the Firefox',
              '0001C8E0': 'First Frames of Shine: Inner Hexagon',
              '0001C950': 'First Frames of Shine: Outer Hexagon Glow 1',
              '0001CA90': 'First Frames of Shine: Outer Hexagon Glow 2',
-             '2': '',
-             '3': '',
+             '00000120': 'Shine Sparkles',
+             '000002E0': 'Trailing Fire Large Up B 1',
              '4': '',
              }
 
@@ -111,16 +111,22 @@ offsetRE = re.compile(r'.*([\da-fA-F]{8})'
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} '
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2})')
 
-def match_check(format, line, formatType):
+def known_offsets(char):
+    for i in matchDict:
+        if i in char:
+            pprint.pprint(i + ' - ' + char[i])
+
+# checks if your hex format is in the current line of hex and if the offset has not been found
+def match_check(format, line, formatType):  
     if (format in line) and (offset not in matchDict):
         matchDict[offset] = line
         formatType.append(offset)
 
-
+# takes the current line of hex the cycles through each format in the format array and the formats array list,
+# adds each offset to correct array 
 def cycle(line):
     x = 0
     for i in range(len(formats)):
-
         match_check(formats[i], line, formatsArr[x])
         if i == 7:
             x += 1
@@ -132,12 +138,13 @@ def cycle(line):
             x += 1
 
 
-sg.theme('DarkBlack')  # Add a touch of color
+sg.theme('DarkAmber')  # Add a touch of color
 # All the stuff inside your window.
-layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse(), sg.Button('Cancel')],
-          [sg.Output(size=(88, 20), key='output')], [sg.Button('parse file', bind_return_key=True),
-           sg.Button('Clear parsed data'), sg.Button('Write to txt file'),
-           sg.Button('Luigi data'), sg.Button('Falcon data'), sg.Button('Spacies data')]]
+layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse()],
+          [sg.Output(size=(88, 20), key='output')],
+          [sg.Button('parse file', bind_return_key=True),
+           sg.Button('clear'), sg.Button('Cancel'), sg.Button('write to txt file')],
+          [sg.Button('known offsets Luigi'), sg.Button('Known Captain Falcon'), sg.Button('fox/falco offsets')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -149,13 +156,13 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window or clicks cancel
         window.close()
         break
-
-    elif event == 'parse file' and values[0] is not None:
+    if event == 'parse file' and values[0] is not None: # open the txt file and search each line for hexadecimal
+                                                        # then cycle the line through each format type
 
         with open(values[0]) as TXT_file:
             for line in TXT_file:
                 hexMatch = offsetRE.search(line)
-                if hexMatch:
+                if hexMatch is not None:
                     offset, hexLine = hexMatch.groups()
                 cycle(hexLine)
                 twoHexLines = hexLine[0:20]
@@ -166,8 +173,8 @@ while True:
             pprint.pprint(formatsArr)
             TXT_file.close()
             sg.popup('parse complete', any_key_closes=True)
-
-    elif event == 'clear':
+    if event == 'clear':
+        window['output'].update('')
         CFFormat *= 0
         zeroSevenFormat *= 0
         fourTwoFourEightFormat *= 0
@@ -179,8 +186,7 @@ while True:
         hexLine = ''
         twoHexLines = ''
         matchDict = {}
-
-    elif event == 'write to txt file':
+    if event == 'write to txt file':
         path = os.path.dirname(os.path.abspath(__file__))
         with open('dat_file_output.txt', 'w') as fp:
             for key, val in matchDict.items():
@@ -189,25 +195,9 @@ while True:
             for listItem in formatsArr:
                 fp.write('%s\n' % listItem)
         fp.close()
-        window['output'].update('saved to dat_file_otput.txt')
-
-    elif event == 'known offsets Luigi':
-        for i in matchDict:
-            if i in luigi:
-                pprint.pprint(i + ' - ' + luigi[i])
-        for i in luigi:
-            if i not in matchDict:
-                pprint.pprint('not found: ' + i + ' - ' + luigi[i])
-
-    elif event == 'Known Captain Falcon':
-        for i in matchDict:
-            if i in captain_falcon:
-                pprint.pprint(i + ' - ' + captain_falcon[i])
-
-    elif event == 'falco/fox offsets':
-        for i in matchDict:
-            if i in falco_fox:
-                pprint.pprint(i + ' - ' + falco_fox[i])
-
-    else:
-        continue
+    if event == 'known offsets Luigi':
+        known_offsets(luigi)
+    if event == 'Known Captain Falcon':
+        known_offsets(captain_falcon)
+    if event == 'fox/falco offsets':
+        known_offsets(falco_fox)
