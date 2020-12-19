@@ -1,19 +1,16 @@
 # dat file parser #
   YOU MUST EXPORT ALL YOUR DAT FILES TO TXT FILES, IT WILL NOT READ JASON, DAT, LAT, BAT OR RTF
   
-  your first step to using datFileParser is to export the character files from HxD as .txt files NOT RTF YOU MUST CHANGE THE FILE FORMAT!!!!
+                       *This script finds the offset addresses at which animation colors and more are located*
+  1.First step to using datFileParser is to export the character files from HxD as .txt files NOT RTF YOU MUST CHANGE THE FILE FORMAT!!!!
   
-  This is a little script i wrote to find the offset addresses at which animation colors and more, are identified by hexset patterns.
+  2.Then parse to identify the color code type (rgb,rrggbb, ect..) and store the offset address that hexset pattern is located in.
   
-  Then identify the color code type (rgb,rrggbb, ect..) and store the offset address that hexset pattern is located in.
+  3.Finally the script compares the found offsets with the list of known character animation/color offsets and the color code hex format.
   
-  finally the script compares the found offsets with the list of known character animation/color offsets and the color code hex format.
-  
-  it will also list any other offset with hexsets that match its patterns, but will not return them when filtering for known locations.
-  
-  I only have about 6-9 months of hobby coding and one python class, this is not good code, i know its probably bad,
-  
-  but I’m loving this so much I’m going back to school for either data science or software engineering
+          also lists any other offset with hexsets that match its patterns, but will not return them when filtering for known locations.
+            I only have about 6-9 months of hobby coding and one python class, this is not good code, i know its probably bad,
+            but I’m loving this so much I’m going back to school for either data science or software engineering
   
 #  melee-custom-files  #
   files for custom melee textures and animations for from scrap projects or use my fully modded character dat files
@@ -34,4 +31,5 @@
 
   EfCoData.dat is the shared animations for all characters along with PlCo.dat.
 
-  dat file parser.exe is the original script i scrapped up after i read this post on smashborads: https://smashboards.com/threads/changing-color-effects-in-melee.313177/
+  dat file parser.exe is the original script i scrapped up after i read this post on,
+  smashborads: https://smashboards.com/threads/changing-color-effects-in-melee.313177/
