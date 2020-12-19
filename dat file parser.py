@@ -144,7 +144,7 @@ layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse()],
           [sg.Output(size=(88, 20), key='output')],
           [sg.Button('parse file', bind_return_key=True),
            sg.Button('clear'), sg.Button('Cancel'), sg.Button('write to txt file')],
-          [sg.Button('known offsets Luigi'), sg.Button('Known Captain Falcon'), sg.Button('shine offsets')]]
+          [sg.Button('known offsets Luigi'), sg.Button('Known Captain Falcon'), sg.Button('fox/falco offsets')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -199,5 +199,5 @@ while True:
         known_offsets(luigi)
     if event == 'Known Captain Falcon':
         known_offsets(captain_falcon)
-    if event == 'shine offsets':
+    if event == 'fox/falco offsets':
         known_offsets(falco_fox)
