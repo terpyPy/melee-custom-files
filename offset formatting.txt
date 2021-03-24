@@ -1,0 +1,4 @@
+ - 04 FF E5 4C 00 FF 33 00 (Lens Flare of Up B in motion)
+ - 04 FF FF CC 00 FF 7F 00 (1 Fire Ring for Up B)
+ - 04 FF FF 00 00 FF 33 00 (1 Fire Ring for Up B)
+

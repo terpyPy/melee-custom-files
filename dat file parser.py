@@ -7,7 +7,8 @@ CFFormat = ['CF ##']
 zeroSevenFormat = ['070707']
 fourTwoFourEightFormat = ['4248']
 nineEightZeroZeroFormat = ['9800 ##']
-formatsArr = [CFFormat, fourTwoFourEightFormat, zeroSevenFormat, nineEightZeroZeroFormat]
+formatsArr = [CFFormat, fourTwoFourEightFormat,
+              zeroSevenFormat, nineEightZeroZeroFormat]
 formats = ['CF 00', 'CF 08', 'CF 07', 'CF 0F', 'CF F0', 'CF 09', 'CF 04', 'CF 0C',
            '42 48',
            '07 07 07',
@@ -39,32 +40,32 @@ luigi = {'0000F3B0': 'aura around fireball', '0000F430': ' Aura around fireball'
          '00011D60': 'Other side of finishing tornado effect',
          '00000350': 'Dust from fireball collision',
          '00011CE0': 'Other side of inner tornado'}
-captain_falcon = {'00000120':'Trailing Smoke Down B 1',
-                  '00000140':'Trailing Smoke Down B 2',
-                  '00000150':'Trailing Smoke Down B 3',
-                  '00000160':'Trailing Smoke Down B 4',
-                  '00000170':'Trailing Smoke Down B 5',
-                  '000001D0':'Trailing Smoke Neutral B 1',
-                  '000001E0':'Trailing Smoke Neutral B 2',  # not found cf 05 not in list
-                  '00000210':'Trailing Smoke Neutral B 3',
-                  '00000290':'Square Dots Neutral B 1',
-                  '000002A0':'Square Dots Neutral B 2',
-                  '000003A0':'Smoke on wings of Neutral B 1',
-                  '000003B0':'Smoke on wings of Neutral B 2',
-                  '000003E0':'Smoke on wings of Neutral B 3',
-                  '00000470':'Square Dots Down B 1',
-                  '00000480':'Square Dots Down B 2',
-                  '000004D0':'Circle Dots Down B 1',
-                  '000004E6':'Circle Dots Down B 2',  # not found unknown cf format
-                  '00000530':'Circle Dots Down B 3',
-                  '00000580':'Trailing Smoke Down B 1',
-                  '000005A0':'Trailing Smoke Down B 2',
-                  '000005B0':'Trailing Smoke Down B 3',
-                  '000005C0':'Trailing Smoke Down B 4',
-                  '000005D0':'Trailing Smoke Down B 5',
-                  '00000630':'Trailing Smoke Down B and After Smoke of Over B 1',
-                  '00000640':'Trailing Smoke Down B and After Smoke of Over B 2',
-                  '00000650':'Trailing Smoke Down B and After Smoke of Over B 3',
+captain_falcon = {'00000120': 'Trailing Smoke Down B 1',
+                  '00000140': 'Trailing Smoke Down B 2',
+                  '00000150': 'Trailing Smoke Down B 3',
+                  '00000160': 'Trailing Smoke Down B 4',
+                  '00000170': 'Trailing Smoke Down B 5',
+                  '000001D0': 'Trailing Smoke Neutral B 1',
+                  '000001E0': 'Trailing Smoke Neutral B 2',  # not found cf 05 not in list
+                  '00000210': 'Trailing Smoke Neutral B 3',
+                  '00000290': 'Square Dots Neutral B 1',
+                  '000002A0': 'Square Dots Neutral B 2',
+                  '000003A0': 'Smoke on wings of Neutral B 1',
+                  '000003B0': 'Smoke on wings of Neutral B 2',
+                  '000003E0': 'Smoke on wings of Neutral B 3',
+                  '00000470': 'Square Dots Down B 1',
+                  '00000480': 'Square Dots Down B 2',
+                  '000004D0': 'Circle Dots Down B 1',
+                  '000004E6': 'Circle Dots Down B 2',  # not found unknown cf format
+                  '00000530': 'Circle Dots Down B 3',
+                  '00000580': 'Trailing Smoke Down B 1',
+                  '000005A0': 'Trailing Smoke Down B 2',
+                  '000005B0': 'Trailing Smoke Down B 3',
+                  '000005C0': 'Trailing Smoke Down B 4',
+                  '000005D0': 'Trailing Smoke Down B 5',
+                  '00000630': 'Trailing Smoke Down B and After Smoke of Over B 1',
+                  '00000640': 'Trailing Smoke Down B and After Smoke of Over B 2',
+                  '00000650': 'Trailing Smoke Down B and After Smoke of Over B 3',
                   '000006A0': 'Front of Down B',
                   '00000760': 'Smoke of Over B large',
                   '00000770': 'Smoke of Over B small',
@@ -98,9 +99,25 @@ falco_fox = {'0001AC80': 'Tip of the Firefox',
              '0001C8E0': 'First Frames of Shine: Inner Hexagon',
              '0001C950': 'First Frames of Shine: Outer Hexagon Glow 1',
              '0001CA90': 'First Frames of Shine: Outer Hexagon Glow 2',
-             '2': '',
-             '3': '',
-             '4': '',
+             "00000125":  "CF 00 FF FF FF FF AD DF 00 2A A3 EE (Shine Sparkles)",
+             "000002EE":  "CF 00 FF FF FF (Trailing Fire Large Up B)",
+             "000002F4": "CF 18 FF FF FF (Trailing Fire Large Up B)",
+             "00000324": "CF 08 FF FF FF (Trailing Fire Large Up B)",
+             "0000032B": "CF 08 FF FF FF (Trailing Fire Large Up B)",
+             "00000383": "CF 00 FF F8 8F FF AD DF 00 FF A9 07 (Trailing Fire Small Up B)",
+             "00000393": "CF 00 FF 71 11 FF AD DF 00 91 07 0B (Trailing Fire Small Up B)",
+             "000003A3": "CF 00 FF FD EE FF AD DF 00 FF EF 05 (Trailing Fire Small Up B)",
+             "000003B3": "CF 00 FF 76 14 FF AD DF 00 FF 94 19 (Trailing Fire Small Up B)",
+             "000003C4": "CF 08 FA 91 19 00 AD DF 08 87 05 0B (Trailing Fire Small Up B)",
+             "0000043A": "CF 00 FF 29 0C FF AD DF 00 FF FF 82 (Square Dots Up B)",
+             "0000044A": "CF 00 FF FF 6E FF AD DF 00 FF 0C 14 (Square Dots Up B)",
+             "000004A9": "CF 00 7F 7F 7F B4 AD DF 00 0C 05 C1 (Trailing Smoke Over B)",
+             "000005AF": "CF 00 FF FF FF 64 AD DF 00 86 0A FA (Lines Coming Off Up B Charge)",
+             "0000052E": "CF 00 FF FF FF (Trailing Fire Big Up B)",
+             "00000536": "CF 18 FF FF FF (Trailing Fire Big Up B)", 
+             "0001A500": "04 FF E5 4C 00 FF 33 00 (Lens Flare of Up B in motion)",
+             "0001B450": "04 FF FF CC 00 FF 7F 00 (1 Fire Ring for Up B)",
+             "0001B520": "04 FF FF 00 00 FF 33 00 (1 Fire Ring for Up B)",
              }
 
 hexLine = ''
@@ -110,6 +127,7 @@ offsetRE = re.compile(r'.*([\da-fA-F]{8})'
                       r'.*([\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} '
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2} '
                       r'[\da-fA-F]{2} [\da-fA-F]{2} [\da-fA-F]{2})')
+
 
 def match_check(format, line, formatType):
     if (format in line) and (offset not in matchDict):
@@ -136,8 +154,9 @@ sg.theme('DarkBlack')  # Add a touch of color
 # All the stuff inside your window.
 layout = [[sg.T('Chose file to parse')], [sg.In(), sg.FileBrowse(), sg.Button('Cancel')],
           [sg.Output(size=(88, 20), key='output')], [sg.Button('parse file', bind_return_key=True),
-           sg.Button('Clear parsed data'), sg.Button('Write to txt file'),
-           sg.Button('Luigi data'), sg.Button('Falcon data'), sg.Button('Spacies data')]]
+                                                     sg.Button('Clear parsed data'), sg.Button(
+                                                         'Write to txt file'),
+                                                     sg.Button('Luigi data'), sg.Button('Falcon data'), sg.Button('Spacies data')]]
 
 # Create the Window
 window = sg.Window('dat file parser', layout)
@@ -189,7 +208,7 @@ while True:
             for listItem in formatsArr:
                 fp.write('%s\n' % listItem)
         fp.close()
-        window['output'].update('saved to dat_file_otput.txt')
+        window['output'].update('saved to dat_file_output.txt')
 
     if event == 'Luigi data':
         for i in matchDict:
